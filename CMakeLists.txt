@@ -24,6 +24,7 @@ endif()
 
 
 option(ENABLE_SHARED "" OFF)
+option(ENABLE_POSITION_INDEPENDENT_CODE "Enable POSITION_INDEPENDENT_CODE property" ON)
 
 # ---------------------------------------------------------
 
@@ -50,6 +51,11 @@ set_property (GLOBAL PROPERTY USE_FOLDERS ON)
 
 # set (CMAKE_LINK_DEF_FILE_FLAG "/DEF:\"${CMAKE_CURRENT_SOURCE_DIR}/mdb.def\"")
 add_library (lmdb ${SOURCE_FILES})
+
+
+if (ENABLE_POSITION_INDEPENDENT_CODE)
+    set_property(TARGET lmdb PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
 if (WIN32)

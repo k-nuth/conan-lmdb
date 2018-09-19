@@ -13,8 +13,12 @@ class LightningDBCppConan(ConanFile):
 
     generators = "cmake"
 
-    options = {"shared": [True, False]}
-    default_options = "shared=False"
+    options = {"shared": [True, False],
+               "fPIC": [True, False]
+    }
+
+    default_options = "shared=False", \
+        "fPIC=True"
 
     # exports = "conanfile.py", "mdb.def", "win32/*", "LICENSE.md"    # "CMakeLists.txt",
     exports_sources = ["CMakeLists.txt"]
@@ -42,6 +46,8 @@ class LightningDBCppConan(ConanFile):
         cmake = CMake(self)
         cmake.verbose = True
         cmake.definitions["ENABLE_SHARED"] = option_on_off(self.options.shared)
+        cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.options.fPIC)
+
         cmake.configure(source_dir=self.source_folder)
         cmake.build()
 

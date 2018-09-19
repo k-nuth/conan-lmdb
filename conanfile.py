@@ -5,7 +5,7 @@ def option_on_off(option):
     return "ON" if option else "OFF"
 
 class LightningDBCppConan(ConanFile):
-    name = "bitprim-conan-lmdb"
+    name = "lmdb"
     version = "0.9.22"
     settings = "os", "compiler", "build_type", "arch"
     url = "https://github.com/bitprim/bitprim-conan-lmdb"
@@ -18,6 +18,7 @@ class LightningDBCppConan(ConanFile):
 
     # exports = "conanfile.py", "mdb.def", "win32/*", "LICENSE.md"    # "CMakeLists.txt",
     exports_sources = ["CMakeLists.txt"]
+    build_policy = "missing"
 
     def source(self):
         # extension = "zip" if sys.platform == "win32" else "tar.gz" % self.folder_name

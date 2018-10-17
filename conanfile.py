@@ -11,6 +11,8 @@ class LightningDBCppConan(ConanFile):
     url = "https://github.com/bitprim/bitprim-conan-lmdb"
     license = "OpenLDAP Public License"
 
+
+
     generators = "cmake"
 
     options = {"shared": [True, False],

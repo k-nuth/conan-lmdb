@@ -26,6 +26,9 @@ class LightningDBCppConan(ConanFile):
     exports_sources = ["CMakeLists.txt"]
     build_policy = "missing"
 
+    def configure(self):
+        del self.settings.compiler.libcxx #Pure-C 
+
     def source(self):
         # extension = "zip" if sys.platform == "win32" else "tar.gz" % self.folder_name
         extension = "zip" if sys.platform == "win32" else "tar.gz" #% self.build_folder

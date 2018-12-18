@@ -4,30 +4,66 @@ import sys, os
 def option_on_off(option):
     return "ON" if option else "OFF"
 
-class LightningDBCppConan(ConanFile):
+
+class LMDBConan(ConanFile):
     name = "lmdb"
     version = "0.9.22"
     settings = "os", "compiler", "build_type", "arch"
     url = "https://github.com/bitprim/bitprim-conan-lmdb"
     license = "OpenLDAP Public License"
 
-
-
     generators = "cmake"
 
     options = {"shared": [True, False],
-               "fPIC": [True, False]
+               "fPIC": [True, False],
+               "verbose": [True, False],
     }
 
     default_options = "shared=False", \
-        "fPIC=True"
+                      "fPIC=True", \
+                      "verbose=False"
 
     # exports = "conanfile.py", "mdb.def", "win32/*", "LICENSE.md"    # "CMakeLists.txt",
     exports_sources = ["CMakeLists.txt"]
     build_policy = "missing"
 
+
+
+    @property
+    def msvc_mt_build(self):
+        return "MT" in str(self.settings.get_safe("compiler.runtime"))
+
+    @property
+    def fPIC_enabled(self):
+        if self.settings.compiler == "Visual Studio":
+            return False
+        else:
+            return self.options.fPIC
+
+    @property
+    def is_shared(self):
+        if self.options.shared and self.msvc_mt_build:
+            return False
+        else:
+            return self.options.shared
+
+
+    def config_options(self):
+        if self.settings.compiler == "Visual Studio":
+            self.options.remove("fPIC")
+            if self.options.shared and self.msvc_mt_build:
+                self.options.remove("shared")
+
     def configure(self):
         del self.settings.compiler.libcxx #Pure-C 
+
+    def package_id(self):
+        self.info.options.verbose = "ANY"
+
+        #For Bitprim Packages libstdc++ and libstdc++11 are the same
+        if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
+            if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
+                self.info.settings.compiler.libcxx = "ANY"
 
     def source(self):
         # extension = "zip" if sys.platform == "win32" else "tar.gz" % self.folder_name
@@ -49,9 +85,11 @@ class LightningDBCppConan(ConanFile):
         # self.run("cmake --build . %s" % cmake.build_config)
 
         cmake = CMake(self)
-        cmake.verbose = True
-        cmake.definitions["ENABLE_SHARED"] = option_on_off(self.options.shared)
-        cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.options.fPIC)
+        cmake.verbose = self.options.verbose
+
+        cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
+        cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
+
 
         cmake.configure(source_dir=self.source_folder)
         cmake.build()

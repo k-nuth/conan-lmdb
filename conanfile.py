@@ -60,11 +60,6 @@ class LMDBConan(ConanFile):
     def package_id(self):
         self.info.options.verbose = "ANY"
 
-        #For Bitprim Packages libstdc++ and libstdc++11 are the same
-        if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
-            if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
-                self.info.settings.compiler.libcxx = "ANY"
-
     def source(self):
         # extension = "zip" if sys.platform == "win32" else "tar.gz" % self.folder_name
         extension = "zip" if sys.platform == "win32" else "tar.gz" #% self.build_folder

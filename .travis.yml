@@ -18,7 +18,7 @@ branches:
 
 env:
    global:
-     - CONAN_REFERENCE: "lmdb/0.9.22"
+     - CONAN_REFERENCE: "lmdb/0.9.23"
      - CONAN_USERNAME: "kth"
      - CONAN_LOGIN_USERNAME: "fpelliccioni"
      - CONAN_CHANNEL: "stable"

@@ -10,7 +10,7 @@ def option_on_off(option):
 
 class LMDBConan(ConanFile):
     name = "lmdb"
-    version = "0.9.22"
+    version = "0.9.23"
     settings = "os", "compiler", "build_type", "arch"
     url = "https://github.com/k-nuth/conan-lmdb"
     license = "OpenLDAP Public License"

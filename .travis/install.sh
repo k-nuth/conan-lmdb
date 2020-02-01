@@ -13,14 +13,16 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
         eval "$(pyenv init -)"
     fi
 
-    pyenv install 2.7.10
-    pyenv virtualenv 2.7.10 conan
+    pyenv install 3.7.1
+    pyenv virtualenv 3.7.1 conan
     pyenv rehash
     pyenv activate conan
 fi
 
-pip install conan --upgrade
-pip install conan_package_tools
+pip install conan_package_tools==0.30.4 > /dev/null
+# pip install kthbuild==0.0.14 > /dev/null
+pip install kthbuild --upgrade > /dev/null 
+
 
 #conan remote add conan_bzip2 https://api.bintray.com/conan/k-nuth/kth
 

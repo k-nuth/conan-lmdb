@@ -2,7 +2,7 @@ from conan.packager import ConanMultiPackager
 
 
 if __name__ == "__main__":
-    builder = ConanMultiPackager(username="bitprim", channel="testing")
+    builder = ConanMultiPackager(username="kth", channel="stable")
     builder.add_common_builds(shared_option_name="lmdb:shared", pure_c=True)
 
     # filtered_builds = []

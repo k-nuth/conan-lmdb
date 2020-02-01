@@ -1,6 +1,7 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.4)
 project (lmdb C CXX)
 
+#TODO(fernando): use kthbuild 
 
 if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -12,10 +13,10 @@ if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
         if (NOT NOT_USE_CPP11_ABI)
             add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
-            message( STATUS "Bitprim: Using _GLIBCXX_USE_CXX11_ABI=1")
+            message( STATUS "Knuth: Using _GLIBCXX_USE_CXX11_ABI=1")
         else()
             add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-            message( STATUS "Bitprim: Using _GLIBCXX_USE_CXX11_ABI=0")
+            message( STATUS "Knuth: Using _GLIBCXX_USE_CXX11_ABI=0")
         endif()
     endif()
 else()

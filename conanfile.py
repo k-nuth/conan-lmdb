@@ -1,15 +1,18 @@
+# Copyright (c) 2016-2020 Knuth Project developers.
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 from conans import ConanFile, CMake, tools
 import sys, os
 
 def option_on_off(option):
     return "ON" if option else "OFF"
 
-
 class LMDBConan(ConanFile):
     name = "lmdb"
     version = "0.9.22"
     settings = "os", "compiler", "build_type", "arch"
-    url = "https://github.com/bitprim/bitprim-conan-lmdb"
+    url = "https://github.com/k-nuth/conan-lmdb"
     license = "OpenLDAP Public License"
 
     generators = "cmake"
@@ -26,8 +29,6 @@ class LMDBConan(ConanFile):
     # exports = "conanfile.py", "mdb.def", "win32/*", "LICENSE.md"    # "CMakeLists.txt",
     exports_sources = ["CMakeLists.txt"]
     build_policy = "missing"
-
-
 
     @property
     def msvc_mt_build(self):

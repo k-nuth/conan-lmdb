@@ -11,10 +11,10 @@ environment:
 
     CONAN_REFERENCE: "lmdb/0.9.24"
     CONAN_USERNAME: "kth"
-    CONAN_LOGIN_USERNAME: "fpelliccioni"
+    CONAN_LOGIN_USERNAME: "info@kth.cash"
     CONAN_CHANNEL: "stable"
 
-    CONAN_UPLOAD: "https://api.bintray.com/conan/k-nuth/kth"
+    CONAN_UPLOAD: "https://knuth.jfrog.io/artifactory/api/conan/knuth"
     CONAN_STABLE_BRANCH_PATTERN: "release/*"
 
     matrix:
@@ -30,16 +30,16 @@ environment:
 
         # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
         #   CONAN_VISUAL_VERSIONS: 12
- 
+
         # - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix, 6@x86_64@seh@posix, 5@x86_64@seh@posix, 4.9@x86_64@seh@posix"
 
         # - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
-        - MINGW_CONFIGURATIONS: "8@x86_64@seh@posix"
+        # - MINGW_CONFIGURATIONS: "8@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix"
-        
+
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - pip.exe install conan --upgrade

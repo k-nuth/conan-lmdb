@@ -21,9 +21,9 @@ fi
 
 pip install conan_package_tools==0.34.2 > /dev/null
 # pip install kthbuild==0.0.14 > /dev/null
-pip install kthbuild --upgrade > /dev/null 
+pip install kthbuild --upgrade > /dev/null
 
 
-#conan remote add conan_bzip2 https://api.bintray.com/conan/k-nuth/kth
+#conan remote add conan_bzip2 https://knuth.jfrog.io/artifactory/api/conan/knuth
 
 conan user
